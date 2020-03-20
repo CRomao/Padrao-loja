@@ -32,12 +32,13 @@ public class App extends Application {
 	private Label labelPassword;
 	private Label labelOpenAccount;
 	private TextField textFieldOAName;
-	private TextField textFieldOAName2;
+	private TextField textFieldOASurname;
 	private TextField textFieldOAEmail;
 	private PasswordField passwordFieldOAPassword;
 	private Button buttonCreateAccount;
 	private Image imageLogo;
 	private Image applicationIcon;
+	ListUser listUser = new ListUser();
 
 	// arquitetura básica, tem esses três métodos
 
@@ -65,8 +66,8 @@ public class App extends Application {
 		textFieldOAName = new TextField();
 		textFieldOAName.setPromptText("Nome");
 		
-		textFieldOAName2 = new TextField();
-		textFieldOAName2.setPromptText("Sobrenome");
+		textFieldOASurname = new TextField();
+		textFieldOASurname.setPromptText("Sobrenome");
 		
 		textFieldOAEmail = new TextField();
 		textFieldOAEmail.setPromptText("Email");
@@ -112,8 +113,8 @@ public class App extends Application {
 		textFieldOAName.setLayoutX(10);
 		textFieldOAName.setLayoutY(145);
 		
-		textFieldOAName2.setLayoutX(170);
-		textFieldOAName2.setLayoutY(145);
+		textFieldOASurname.setLayoutX(170);
+		textFieldOASurname.setLayoutY(145);
 		
 		textFieldOAEmail.setLayoutX(10);
 		textFieldOAEmail.setLayoutY(180);
@@ -130,7 +131,7 @@ public class App extends Application {
 		
 		pane.getChildren().addAll(labelLogoTipo, labelUser, textFieldUserLogin, 
 				labelPassword,passwordFieldUserLogin, buttonLogin, buttonExit, 
-				labelOpenAccount, textFieldOAName, textFieldOAName2, textFieldOAEmail,
+				labelOpenAccount, textFieldOAName, textFieldOASurname, textFieldOAEmail,
 				passwordFieldOAPassword,buttonCreateAccount);
 		
 		
@@ -153,26 +154,76 @@ public class App extends Application {
 				logar();
 			}
 		});
+		
+		buttonCreateAccount.setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent event) {
+				createAccount();
+			}
+			
+		});
 
 	}
 
 	public void logar() {
-		if (textFieldUserLogin.getText().equals("admin") && passwordFieldUserLogin.getText().equals("admin")) {
-			// TODO Abrir tela de logado
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Informação");
+		alert.setHeaderText(null);
+		if (listUser.verifyLogin(textFieldUserLogin.getText(), passwordFieldUserLogin.getText())) {
+			alert.setContentText("Login realizado com sucesso!");
 		} else {
-			Alert alert = new Alert(AlertType.INFORMATION);
-			alert.setTitle("Informação");
-			alert.setHeaderText(null);
 			alert.setContentText("Email ou senha errado!");
 			
-			alert.showAndWait();
 		}
+		alert.showAndWait();
 	}
 	
 	public void fecharApp() {
 		System.exit(0);
 	}
 
+	public void createAccount(){
+		String text = "";
+		Alert alert = new Alert(AlertType.INFORMATION);
+
+		if(textFieldOAName.getText().trim().equals("")) {
+			text = "Preencha o seu nome!";
+			
+		}else if(textFieldOASurname.getText().trim().equals("")){
+			text = "Preencha o seu sobrenome!";
+			
+		}else if(textFieldOAEmail.getText().trim().equals("")){
+			text = "Preencha o seu email!";
+			
+		}else if(passwordFieldOAPassword.getText().trim().equals("")){
+			text = "Digite a sua senha!";
+		}else {
+			text = "Cadastro realizado com sucesso\nFaça o seu login!";
+			User newUser = new User();
+			
+			newUser.setName(textFieldOAName.getText());
+			newUser.setSurname(textFieldOASurname.getText());
+			newUser.setEmail(textFieldOAEmail.getText());
+			newUser.setPassword(passwordFieldOAPassword.getText());
+			
+			listUser.addUser(newUser);
+			
+			clearFields();
+		}
+		alert.setContentText(text);
+		alert.setTitle("Informação");
+		alert.setHeaderText(null);
+		alert.showAndWait();
+	}
+	
+	public void clearFields() {
+		textFieldOAName.setText("");
+		textFieldOASurname.setText("");
+		textFieldOAEmail.setText("");
+		passwordFieldOAPassword.setText("");
+	}
+	
 	@Override
     public void start(Stage stage) {
     	initComponent();
