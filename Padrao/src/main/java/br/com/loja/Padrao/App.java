@@ -42,7 +42,7 @@ public class App extends Application {
 
 	// arquitetura básica, tem esses três métodos
 
-	public void initComponent() {
+	public void initComponents() {
 		pane = new AnchorPane();
 		pane.setPrefSize(500, 300);
 
@@ -83,7 +83,7 @@ public class App extends Application {
 
 	}
 
-	public void initLayout() {
+	public void initLayouts() {
 		textFieldUserLogin.setLayoutX(160);
 		textFieldUserLogin.setLayoutY(40);
 		
@@ -172,11 +172,22 @@ public class App extends Application {
 		alert.setHeaderText(null);
 		if (listUser.verifyLogin(textFieldUserLogin.getText(), passwordFieldUserLogin.getText())) {
 			alert.setContentText("Login realizado com sucesso!");
+			alert.showAndWait();
+			
+			Home home = new Home();
+			Stage stageHome = new Stage();
+			try {
+				home.start(stageHome);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
 		} else {
 			alert.setContentText("Email ou senha errado!");
+			alert.showAndWait();
 			
 		}
-		alert.showAndWait();
+		
 	}
 	
 	public void fecharApp() {
@@ -226,10 +237,10 @@ public class App extends Application {
 	
 	@Override
     public void start(Stage stage) {
-    	initComponent();
+    	initComponents();
     	initListeners();
     	initStage(stage);
-    	initLayout();
+    	initLayouts();
     	stage = App.stage;
     }
 	
