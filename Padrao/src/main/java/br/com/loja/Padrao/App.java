@@ -1,5 +1,7 @@
 package br.com.loja.Padrao;
 
+import java.util.List;
+
 //import com.fap.twitter.App;
 
 import javafx.application.Application;
@@ -42,7 +44,7 @@ public class App extends Application {
 
 	// arquitetura básica, tem esses três métodos
 
-	public void initComponent() {
+	public void initComponents() {
 		pane = new AnchorPane();
 		pane.setPrefSize(500, 300);
 
@@ -58,7 +60,7 @@ public class App extends Application {
 		imageLogo = new Image("file:///D:/PROJETOS/Padrao-loja/Padrao/img/facebook-logo.png");
 		labelLogoTipo = new Label("", new ImageView(imageLogo));
 		
-		labelUser = new Label("Email ou Telefone");
+		labelUser = new Label("Email");
 		labelPassword = new Label("Senha");
 		
 		labelOpenAccount = new Label("Abra uma conta");
@@ -83,7 +85,7 @@ public class App extends Application {
 
 	}
 
-	public void initLayout() {
+	public void initLayouts() {
 		textFieldUserLogin.setLayoutX(160);
 		textFieldUserLogin.setLayoutY(40);
 		
@@ -93,10 +95,12 @@ public class App extends Application {
 		buttonLogin.setLayoutX(340);
 		buttonLogin.setLayoutY(70);
 		buttonLogin.setPrefSize(150, 35);
+		buttonLogin.setStyle("-fx-background-color: #3498DB;");
 		
 		buttonExit.setLayoutX(410);
 		buttonExit.setLayoutY(250);
 		buttonExit.setPrefSize(80, 40);
+		buttonExit.setStyle("-fx-background-color: #EC7063;");
 		
 		labelLogoTipo.setLayoutX(25);
 		labelLogoTipo.setLayoutY(20);
@@ -127,6 +131,7 @@ public class App extends Application {
 		buttonCreateAccount.setLayoutX(10);
 		buttonCreateAccount.setLayoutY(250);
 		buttonCreateAccount.setPrefSize(100, 40);
+		buttonCreateAccount.setStyle("-fx-background-color: #2ECC71;");
 		
 		
 		pane.getChildren().addAll(labelLogoTipo, labelUser, textFieldUserLogin, 
@@ -172,11 +177,22 @@ public class App extends Application {
 		alert.setHeaderText(null);
 		if (listUser.verifyLogin(textFieldUserLogin.getText(), passwordFieldUserLogin.getText())) {
 			alert.setContentText("Login realizado com sucesso!");
+			alert.showAndWait();
+			
+			Home home = new Home(listUser.getUserLogged());
+			Stage stageHome = new Stage();
+			try {
+				home.start(stageHome);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
 		} else {
-			alert.setContentText("Email ou senha errado!");
+			alert.setContentText("Email ou senha inválido!");
+			alert.showAndWait();
 			
 		}
-		alert.showAndWait();
+		
 	}
 	
 	public void fecharApp() {
@@ -226,10 +242,10 @@ public class App extends Application {
 	
 	@Override
     public void start(Stage stage) {
-    	initComponent();
+    	initComponents();
     	initListeners();
     	initStage(stage);
-    	initLayout();
+    	initLayouts();
     	stage = App.stage;
     }
 	
