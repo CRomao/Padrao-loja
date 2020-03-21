@@ -19,7 +19,7 @@ import javafx.stage.Stage;
 
 public class Home extends Application {
 
-	// parte de cima
+	// Componentes da parte de cima
 	private BorderPane pane;
 	private static Stage stage;
 	private Label labelLogoTipo;
@@ -28,14 +28,15 @@ public class Home extends Application {
 	private User userLogged;
 	private ListUser listUser;
 
-	// parte lateral esquerda
+	// Componentes da parte lateral esquerda
 	private Button buttonFeed, buttonMessenger, buttonWatch, buttonMarketplace, buttonGroups, buttonCampaign,
 			buttonPages, buttonEvents, buttonListFriends, buttonSeeMore, buttonUserName;
 	private Label labelExplorar;
 
-	// parte lateral direita
+	// Componentes da parte lateral direita
 	Button buttonInformationRight4;
 
+	//É recebido no construtor o usuário que fez o login, e a lista de usuários da tela de Login
 	public Home(User userLogged, ListUser list) {
 		setUserLogged(userLogged);
 		listUser = list;
@@ -49,7 +50,7 @@ public class Home extends Application {
 		this.userLogged = userLogged;
 	}
 
-	public void initComponents() {
+	public void initComponents() {//função para inicializar os componentes
 		pane = new BorderPane();
 		pane.setPrefSize(850, 550);
 
@@ -70,7 +71,7 @@ public class Home extends Application {
 
 	}
 
-	private HBox initComponentesTop() {
+	private HBox initComponentesTop() {//função para inicializar os componentes do menu superior
 		HBox top = new HBox(20);
 
 		labelLogoTipo = new Label("Facebook");
@@ -104,9 +105,11 @@ public class Home extends Application {
 		return top;
 	}
 
-	private VBox initComponentsMenu() {
+	private VBox initComponentsMenu() {//função para inicializar os componentes do menu da lateral esquerda
 		VBox vBoxMenu = new VBox(20);
 		// parte lateral esquerda
+		
+		//Recebe o nome e sobrenome do usuário logado
 		buttonUserName = new Button(getUserLogged().getName() + " " + getUserLogged().getSurname());
 		buttonUserName.setPrefSize(200, 30);
 		buttonUserName.setStyle("-fx-background-color: #85C1E9;");
@@ -139,7 +142,7 @@ public class Home extends Application {
 		return vBoxMenu;
 	}
 
-	private VBox initComponentsRight() {
+	private VBox initComponentsRight() {//função para inicializar os componentes do menu da lateral direita
 		VBox vBoxMenu = new VBox(20);
 
 		// parte lateral direita
@@ -164,7 +167,7 @@ public class Home extends Application {
 		return vBoxMenu;
 	}
 
-	private VBox initComponentsPosts() {
+	private VBox initComponentsPosts() {//função para inicializar os componentes do centro
 		VBox vBoxMenu = new VBox(20);
 		TextArea textAreaPost = new TextArea();
 		textAreaPost.setPromptText("No que você está pensando, Cicero?");
@@ -185,7 +188,7 @@ public class Home extends Application {
 	public void initLayouts() {
 	}
 
-	public void initListeners() {
+	public void initListeners() {// Função para executar os eventos associados aos botões
 
 		buttonExit.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -207,7 +210,7 @@ public class Home extends Application {
 
 	}
 
-	public void listUsers() {
+	public void listUsers() {//Função para mostrar em um Alert todos os usuários cadastrados
 		Alert alert = new Alert(AlertType.INFORMATION);
 		String text = "";
 		for (int i = 0; i < listUser.users.size(); i++) {
@@ -239,17 +242,7 @@ public class Home extends Application {
 		stage.setScene(scene);
 		stage.setResizable(true);
 		stage.setTitle("Facebook - Home");
-		// stage.getIcons().add(applicationIcon);
 		stage.show();
 
 	}
-
-	public static Stage getStage() {
-		return stage;
-	}
-
-	public static void setStage(Stage stage) {
-		Home.stage = stage;
-	}
-
 }

@@ -44,7 +44,7 @@ public class App extends Application {
 
 	// arquitetura básica, tem esses três métodos
 
-	public void initComponents() {
+	public void initComponents() { //função para inicializar os componentes
 		pane = new AnchorPane();
 		pane.setPrefSize(500, 300);
 
@@ -57,8 +57,8 @@ public class App extends Application {
 		buttonLogin = new Button("Login");
 		buttonExit = new Button("Sair");
 
-		dirImageLogo = new File("img/facebook-logo.png");
-		String file = (dirImageLogo.toURI().toString());
+		dirImageLogo = new File("img/facebook-logo.png"); 
+		String file = (dirImageLogo.toURI().toString()); //Pegar o diretório absoluto da imagem
 		imageLogo = new Image(file);
 		labelLogoTipo = new Label("", new ImageView(imageLogo));
 
@@ -87,7 +87,7 @@ public class App extends Application {
 
 	}
 
-	public void initLayouts() {
+	public void initLayouts() {//função para iniciar as estilizações dos componentes
 		textFieldUserLogin.setLayoutX(160);
 		textFieldUserLogin.setLayoutY(40);
 
@@ -140,7 +140,7 @@ public class App extends Application {
 				passwordFieldOAPassword, buttonCreateAccount);
 	}
 
-	public void initListeners() {
+	public void initListeners() { // Função para executar os eventos associados aos botões
 		buttonExit.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -168,11 +168,14 @@ public class App extends Application {
 
 	}
 
-	public void logar() {
+	public void logar() {//Função para fazer o login
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("Informação");
 		alert.setHeaderText(null);
+		//Abaixo é verificado se existe no ArrayList, se existir, ele traz a tela Home
 		if (listUser.verifyLogin(textFieldUserLogin.getText(), passwordFieldUserLogin.getText())) {
+			textFieldUserLogin.setText("");
+			passwordFieldUserLogin.setText("");
 			alert.setContentText("Login realizado com sucesso!");
 			alert.showAndWait();
 
@@ -192,11 +195,11 @@ public class App extends Application {
 
 	}
 
-	public void fecharApp() {
+	public void fecharApp() {//Função para fechar a aplicação
 		System.exit(0);
 	}
 
-	public void createAccount() {
+	public void createAccount() {//Função para criar uma nova conta
 		String text = "";
 		Alert alert = new Alert(AlertType.INFORMATION);
 
@@ -212,9 +215,10 @@ public class App extends Application {
 		} else if (passwordFieldOAPassword.getText().trim().equals("")) {
 			text = "Digite a sua senha!";
 		} else {
-			text = "Cadastro realizado com sucesso\nFaça o seu login!";
+			//caso todos os campos estejam preenchidos, cria-se um novo usuário e adiciona na lista
+			text = "Cadastro realizado com sucesso!\nJá pode fazer o seu login!";
+			
 			User newUser = new User();
-
 			newUser.setName(textFieldOAName.getText());
 			newUser.setSurname(textFieldOASurname.getText());
 			newUser.setEmail(textFieldOAEmail.getText());
@@ -222,7 +226,7 @@ public class App extends Application {
 
 			listUser.addUser(newUser);
 
-			clearFields();
+			clearFields();//Após adicionar, chama a função para limpar os campos
 		}
 		alert.setContentText(text);
 		alert.setTitle("Informação");
@@ -230,7 +234,7 @@ public class App extends Application {
 		alert.showAndWait();
 	}
 
-	public void clearFields() {
+	public void clearFields() {//Função para limpar os campos quando o usuário finalizar o cadastro
 		textFieldOAName.setText("");
 		textFieldOASurname.setText("");
 		textFieldOAEmail.setText("");
@@ -238,7 +242,7 @@ public class App extends Application {
 	}
 
 	@Override
-	public void start(Stage stage) {
+	public void start(Stage stage) {//Função para dar start
 		initComponents();
 		initListeners();
 		initStage(stage);
@@ -246,7 +250,7 @@ public class App extends Application {
 		stage = App.stage;
 	}
 
-	private void initStage(Stage stage) {
+	private void initStage(Stage stage) {//Função para iniciar o stage
 		Scene scene = new Scene(pane);
 		stage.setScene(scene);
 		stage.setResizable(false);
