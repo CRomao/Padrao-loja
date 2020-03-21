@@ -5,10 +5,12 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class Home extends Application{
@@ -49,22 +51,17 @@ public class Home extends Application{
 		HBox hBoxTop = initComponentesTop();
 		pane.setTop(hBoxTop);
 		
-
+		VBox vBoxMenu = initComponentsMenu();
+		pane.setLeft(vBoxMenu);
+		vBoxMenu.setAlignment(Pos.TOP_LEFT);
 		
-		//parte lateral esquerda
-		buttonUserName = new Button(getUserLogged().getName() +" "+getUserLogged().getSurname());
-		buttonFeed = new Button("Feed de Noticias");
-		buttonMessenger = new Button("Messenger");
-		buttonWatch = new Button("Watch");
-		buttonMarketplace = new Button("MarketPlace");
-		buttonGroups = new Button("Grupos");
-		buttonCampaign = new Button("Campanha de arr...");
-		buttonPages = new Button("Páginas");
-		buttonEvents = new Button("Eventos");
-		buttonListFriends = new Button("Lista de Amigos");
-		buttonSeeMore = new Button("Ver mais...");
+		VBox vBoxPosts = initComponentsPosts();
+		pane.setCenter(vBoxPosts);
+		vBoxPosts.setAlignment(Pos.CENTER);	
 		
-		labelExplorar = new Label("Explorar");
+		VBox vBoxMenuRight = initComponentsRight();
+		pane.setRight(vBoxMenuRight);
+		vBoxMenuRight.setAlignment(Pos.TOP_RIGHT);
 		
 		
 	}
@@ -73,24 +70,24 @@ public class Home extends Application{
     	HBox top = new HBox(20);
     	
 		labelLogoTipo = new Label("Facebook");
-		labelLogoTipo.setAlignment(Pos.TOP_RIGHT);
+		labelLogoTipo.setAlignment(Pos.TOP_LEFT);
 		
 		textFieldSearch = new TextField();
 		textFieldSearch.setPromptText("Procurar...");
 		textFieldSearch.setPrefSize(250, 25);
-		textFieldSearch.setAlignment(Pos.TOP_RIGHT);
+		textFieldSearch.setAlignment(Pos.TOP_LEFT);
 		
 		buttonSearch = new Button("Pesquisar");
-		buttonSearch.setAlignment(Pos.TOP_RIGHT);
+		buttonSearch.setAlignment(Pos.TOP_LEFT);
 		
 		buttonUserPerfil = new Button(getUserLogged().getName());
-		buttonUserPerfil.setAlignment(Pos.TOP_RIGHT);
+		buttonUserPerfil.setAlignment(Pos.TOP_LEFT);
 		
 		buttonPagInitial = new Button("Página Inicial");
-		buttonPagInitial.setAlignment(Pos.TOP_RIGHT);
+		buttonPagInitial.setAlignment(Pos.TOP_LEFT);
 		
 		buttonCreate = new Button("Criar");
-		buttonCreate.setAlignment(Pos.TOP_RIGHT);
+		buttonCreate.setAlignment(Pos.TOP_LEFT);
 		
 		labelFriends = new Label();
 		
@@ -101,7 +98,7 @@ public class Home extends Application{
 		labelHelp = new Label();
 		
 		buttonExit = new Button("Sair");
-		buttonExit.setAlignment(Pos.TOP_RIGHT);
+		buttonExit.setAlignment(Pos.TOP_LEFT);
 		
 		top.getChildren().addAll(labelLogoTipo, textFieldSearch, buttonSearch, buttonUserPerfil,
 				buttonPagInitial, buttonCreate, buttonExit);
@@ -109,71 +106,86 @@ public class Home extends Application{
 		return top;
 	}
 	
+    private VBox initComponentsMenu() {
+    	VBox vBoxMenu = new VBox(20);
+    	//parte lateral esquerda
+		buttonUserName = new Button(getUserLogged().getName() +" "+getUserLogged().getSurname());
+		buttonUserName.setPrefSize(200, 30);
+		buttonFeed = new Button("Feed de Noticias");
+		buttonFeed.setPrefSize(200, 30);
+		buttonMessenger = new Button("Messenger");
+		buttonMessenger.setPrefSize(200, 30);
+		buttonWatch = new Button("Watch");
+		buttonWatch.setPrefSize(200, 30);
+		buttonMarketplace = new Button("MarketPlace");
+		buttonMarketplace.setPrefSize(200, 30);
+		buttonGroups = new Button("Grupos");
+		buttonGroups.setPrefSize(200, 30);
+		buttonCampaign = new Button("Campanha de arr...");
+		buttonCampaign.setPrefSize(200, 30);
+		buttonPages = new Button("Páginas");
+		buttonPages.setPrefSize(200, 30);
+		buttonEvents = new Button("Eventos");
+		buttonEvents.setPrefSize(200, 30);
+		buttonListFriends = new Button("Lista de Amigos");
+		buttonListFriends.setPrefSize(200, 30);
+		buttonSeeMore = new Button("Ver mais...");
+		buttonSeeMore.setPrefSize(200, 30);
+		
+		labelExplorar = new Label("Explorar");
+		
+		vBoxMenu.getChildren().addAll(buttonUserName, buttonFeed, buttonMessenger, buttonWatch, 
+				buttonMarketplace, labelExplorar, buttonGroups, buttonCampaign, buttonPages, 
+				buttonEvents, buttonListFriends, buttonSeeMore);
+		return vBoxMenu;
+	}
+    
+    private VBox initComponentsRight() {
+    	VBox vBoxMenu = new VBox(20);
+    	//parte lateral esquerda
+
+		
+ 		Button buttonInformationRight = new Button("Aniversariantes");
+ 		buttonInformationRight.setPrefSize(200, 30);
+ 		Button buttonInformationRight2 = new Button("Mais relevantes no MarketPlace");
+ 		buttonInformationRight2.setPrefSize(200, 30);
+ 		Button buttonInformationRight3 = new Button("Patrocinado");
+ 		buttonInformationRight3.setPrefSize(200, 30);
+ 		Button buttonInformationRight4 = new Button("Anúncio");
+ 		buttonInformationRight4.setPrefSize(200, 30);
+ 		TextArea textAreaPostRight = new TextArea();
+ 		textAreaPostRight.setPromptText("Pesoas que curtiram a foto do momento");
+ 		textAreaPostRight.setPrefSize(200, 150);
+ 		TextArea textAreaPostRight2 = new TextArea();
+ 		textAreaPostRight2.setPromptText("Pesoas que curtiram a foto do momento");
+ 		textAreaPostRight2.setPrefSize(200, 150);
+ 		
+ 		
+ 		vBoxMenu.getChildren().addAll(buttonInformationRight, buttonInformationRight2,
+ 				buttonInformationRight3, buttonInformationRight4,textAreaPostRight, 
+ 				textAreaPostRight2);
+		return vBoxMenu;
+	}
+    
+    private VBox initComponentsPosts() {
+ 		VBox vBoxMenu = new VBox(20);
+ 		TextArea textAreaPost = new TextArea();
+ 		textAreaPost.setPromptText("No que você está pensando, Cicero?");
+ 		
+ 		TextArea textAreaPost2 = new TextArea();
+ 		textAreaPost2.setPromptText("Stories");
+ 		
+ 		TextArea textAreaPost3 = new TextArea();
+ 		textAreaPost3.setPromptText("Publicação");
+ 		
+ 		TextArea textAreaPost4 = new TextArea();
+ 		textAreaPost4.setPromptText("Publicação");
+ 		
+ 		vBoxMenu.getChildren().addAll(textAreaPost, textAreaPost2,textAreaPost3, textAreaPost4);
+ 		return vBoxMenu;
+ 	}
+	
 	public void initLayouts(){
-		
-		/*labelLogoTipo.setLayoutX(10);
-		labelLogoTipo.setLayoutY(10);
-		
-		textFieldSearch.setLayoutX(70);
-		textFieldSearch.setLayoutY(10);
-		textFieldSearch.setPrefSize(250, 25);
-		
-		buttonSearch.setLayoutX(323);
-		buttonSearch.setLayoutY(10);
-		
-		buttonUserPerfil.setLayoutX(415);
-		buttonUserPerfil.setLayoutY(10);
-		
-		buttonPagInitial.setLayoutX(480);
-		buttonPagInitial.setLayoutY(10);*/
-		
-		//parte lateral esqueda
-		
-		buttonUserName.setLayoutX(5);
-		buttonUserName.setLayoutY(40);
-		
-		buttonFeed.setLayoutX(5);
-		buttonFeed.setLayoutY(80);
-		
-		buttonMessenger.setLayoutX(5);
-		buttonMessenger.setLayoutY(120);
-		
-		buttonWatch.setLayoutX(5);
-		buttonWatch.setLayoutY(160);
-		
-		buttonMarketplace.setLayoutX(5);
-		buttonMarketplace.setLayoutY(200);
-		
-		labelExplorar.setLayoutX(5);
-		labelExplorar.setLayoutY(240);
-		
-		buttonGroups.setLayoutX(5);
-		buttonGroups.setLayoutY(280);
-		
-		buttonCampaign.setLayoutX(5);
-		buttonCampaign.setLayoutY(320);
-		
-		buttonPages.setLayoutX(5);
-		buttonPages.setLayoutY(360);
-		
-		buttonEvents.setLayoutX(5);
-		buttonEvents.setLayoutY(400);
-		
-		buttonListFriends.setLayoutX(5);
-		buttonListFriends.setLayoutY(440);
-		
-		buttonSeeMore.setLayoutX(5);
-		buttonSeeMore.setLayoutY(480);
-		
-		
-		
-		
-		
-		
-	//	pane.getChildren().addAll(labelLogoTipo, textFieldSearch, buttonSearch, buttonUserPerfil,
-	//			buttonPagInitial, buttonUserName, buttonFeed, buttonMessenger, buttonWatch, 
-	//			buttonMarketplace, labelExplorar, buttonGroups, buttonCampaign, buttonPages, 
-	//			buttonEvents, buttonListFriends, buttonSeeMore);
 	}
 	
 	public void initListeners() {
