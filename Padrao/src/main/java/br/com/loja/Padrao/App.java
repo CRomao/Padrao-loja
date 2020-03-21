@@ -60,7 +60,7 @@ public class App extends Application {
 		imageLogo = new Image("file:///D:/PROJETOS/Padrao-loja/Padrao/img/facebook-logo.png");
 		labelLogoTipo = new Label("", new ImageView(imageLogo));
 		
-		labelUser = new Label("Email ou Telefone");
+		labelUser = new Label("Email");
 		labelPassword = new Label("Senha");
 		
 		labelOpenAccount = new Label("Abra uma conta");
@@ -95,10 +95,12 @@ public class App extends Application {
 		buttonLogin.setLayoutX(340);
 		buttonLogin.setLayoutY(70);
 		buttonLogin.setPrefSize(150, 35);
+		buttonLogin.setStyle("-fx-background-color: #3498DB;");
 		
 		buttonExit.setLayoutX(410);
 		buttonExit.setLayoutY(250);
 		buttonExit.setPrefSize(80, 40);
+		buttonExit.setStyle("-fx-background-color: #EC7063;");
 		
 		labelLogoTipo.setLayoutX(25);
 		labelLogoTipo.setLayoutY(20);
@@ -129,6 +131,7 @@ public class App extends Application {
 		buttonCreateAccount.setLayoutX(10);
 		buttonCreateAccount.setLayoutY(250);
 		buttonCreateAccount.setPrefSize(100, 40);
+		buttonCreateAccount.setStyle("-fx-background-color: #2ECC71;");
 		
 		
 		pane.getChildren().addAll(labelLogoTipo, labelUser, textFieldUserLogin, 
@@ -185,7 +188,7 @@ public class App extends Application {
 			}
 			
 		} else {
-			alert.setContentText("Email ou senha errado!");
+			alert.setContentText("Email ou senha inválido!");
 			alert.showAndWait();
 			
 		}

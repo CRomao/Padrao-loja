@@ -82,6 +82,7 @@ public class Home extends Application{
 		
 		buttonUserPerfil = new Button(getUserLogged().getName());
 		buttonUserPerfil.setAlignment(Pos.TOP_LEFT);
+		buttonUserPerfil.setStyle("-fx-background-color: #85C1E9;");
 		
 		buttonPagInitial = new Button("Página Inicial");
 		buttonPagInitial.setAlignment(Pos.TOP_LEFT);
@@ -99,6 +100,7 @@ public class Home extends Application{
 		
 		buttonExit = new Button("Sair");
 		buttonExit.setAlignment(Pos.TOP_LEFT);
+		buttonExit.setStyle("-fx-background-color: #EC7063;");
 		
 		top.getChildren().addAll(labelLogoTipo, textFieldSearch, buttonSearch, buttonUserPerfil,
 				buttonPagInitial, buttonCreate, buttonExit);
@@ -111,6 +113,7 @@ public class Home extends Application{
     	//parte lateral esquerda
 		buttonUserName = new Button(getUserLogged().getName() +" "+getUserLogged().getSurname());
 		buttonUserName.setPrefSize(200, 30);
+		buttonUserName.setStyle("-fx-background-color: #85C1E9;");
 		buttonFeed = new Button("Feed de Noticias");
 		buttonFeed.setPrefSize(200, 30);
 		buttonMessenger = new Button("Messenger");
