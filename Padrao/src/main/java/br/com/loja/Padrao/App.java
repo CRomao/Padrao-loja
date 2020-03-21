@@ -1,5 +1,7 @@
 package br.com.loja.Padrao;
 
+import java.util.List;
+
 //import com.fap.twitter.App;
 
 import javafx.application.Application;
@@ -174,7 +176,7 @@ public class App extends Application {
 			alert.setContentText("Login realizado com sucesso!");
 			alert.showAndWait();
 			
-			Home home = new Home();
+			Home home = new Home(listUser.getUserLogged());
 			Stage stageHome = new Stage();
 			try {
 				home.start(stageHome);
