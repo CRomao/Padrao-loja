@@ -11,6 +11,7 @@ public class ListUser {
 		users.add(newUser);
 	}
 
+	//Função para verificar se o email e senha estão corretos
 	public boolean verifyLogin(String email, String pass) {
 		for (int i = 0; i < users.size(); i++) {
 			if (users.get(i).getEmail().equals(email) && users.get(i).getPassword().equals(pass)) {
@@ -19,10 +20,6 @@ public class ListUser {
 			}
 		}
 		return false;
-	}
-
-	public int totalUsers() {
-		return users.size();
 	}
 
 	public User getUserLogged() {
